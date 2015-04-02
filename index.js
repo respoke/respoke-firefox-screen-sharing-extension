@@ -13,8 +13,9 @@
 var pageMod = require('sdk/page-mod');
 var prefs = require("sdk/preferences/service");
 
-var allowedUris = ['http://localhost:9876*', 'https://respoke.github.io/*', 'http://respoke.io/*'];
-var allowedDomains = ['respoke.github.io', 'localhost:9876'];
+var allowedUris = ['https://respoke.github.io/*', 'https://1660a8b4.ngrok.com/*'];//can only have 1 wildcard
+var allowedDomains = ['respoke.github.io', '*.ngrok.com'];
+var allowedUris = ['https://1660a8b4.ngrok.com/', 'https://respoke.github.io'];//needs a better way to do this
 
 var allowedDomainsPref = 'media.getusermedia.screensharing.allowed_domains';
 var enableScreensharingPref = 'media.getusermedia.screensharing.enabled';
@@ -34,7 +35,6 @@ exports.main = function (options, callbacks) {
         });
 
         prefs.set(allowedDomainsPref, domains.join(','));
-
     }
 
     pageMod.PageMod({
@@ -43,7 +43,16 @@ exports.main = function (options, callbacks) {
         contentScriptWhen: 'end'
     });
 
-    //need to do the above for tabs already open
+    //load the script into any tabs that are already active
+    var tabs = require("sdk/tabs");
+    for (let tab of tabs) {
+         //this needs tidying up long term
+        if (allowedUris.indexOf(tab.url) !== -1) {
+            tab.attach({
+                contentScriptFile: './content.js',
+            });
+        }
+    }
 
 };
 

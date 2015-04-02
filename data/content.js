@@ -12,9 +12,8 @@
  * Let the Respoke Library know the extension has loaded and so the domains are valid now
  */
 
-
 document.dispatchEvent((function () {
     var evt = document.createEvent('CustomEvent');
-    evt.initCustomEvent('respoke-firefox-screensharing-available', true, true, 'available');
+    evt.initCustomEvent('respoke-firefox-screen-sharing-available', true, true, 'available');
     return evt;
 })());
