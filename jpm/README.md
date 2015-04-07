@@ -2,7 +2,7 @@
 
 ## Support
 
-Firefox versions above 38
+Firefox versions 38 and above
 
 ## jpm
 
