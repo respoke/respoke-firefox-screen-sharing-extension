@@ -1,19 +1,21 @@
-var main = require("../");
+//TODO: Implement basic unit tests
 
-exports["test main"] = function(assert) {
-  assert.pass("Unit test running!");
-};
+// var main = require("../");
 
-exports["test main async"] = function(assert, done) {
-  assert.pass("async Unit test running!");
-  done();
-};
+// exports["test main"] = function(assert) {
+//   assert.pass("Unit test running!");
+// };
 
-exports["test dummy"] = function(assert, done) {
-  main.dummy("foo", function(text) {
-    assert.ok((text === "foo"), "Is the text actually 'foo'");
-    done();
-  });
-};
+// exports["test main async"] = function(assert, done) {
+//   assert.pass("async Unit test running!");
+//   done();
+// };
 
-require("sdk/test").run(exports);
+// exports["test dummy"] = function(assert, done) {
+//   main.dummy("foo", function(text) {
+//     assert.ok((text === "foo"), "Is the text actually 'foo'");
+//     done();
+//   });
+// };
+
+// require("sdk/test").run(exports);

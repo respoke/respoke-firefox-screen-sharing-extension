@@ -14,9 +14,13 @@ var pageMod = require('sdk/page-mod');
 var data = require("sdk/self").data;
 var prefs = require("sdk/preferences/service");
 
-var allowedUris = ['https://respoke.github.io/*'];
-var allowedDomains = ['respoke.github.io'];
-var allowedUris = ['https://1660a8b4.ngrok.com/', 'https://respoke.github.io'];//needs a better way to do this
+// allowedUris can only have 1 wildcard, unlike Chrome
+var allowedUris = ['https://respoke.github.io/*', 'https://1660a8b4.ngrok.com/*'];
+var allowedDomains = ['respoke.github.io', '*.ngrok.com'];
+
+// used for including the content script into specific loaded tabs after installation
+// this needs improving so we can use regular expressions etc
+var allowedSpecificUris = ['https://1660a8b4.ngrok.com/', 'https://respoke.github.io'];
 
 var allowedDomainsPref = 'media.getusermedia.screensharing.allowed_domains';
 var enableScreensharingPref = 'media.getusermedia.screensharing.enabled';
@@ -49,7 +53,7 @@ exports.main = function (options, callbacks) {
     var tabs = require("sdk/tabs");
     for (let tab of tabs) {
          //this needs tidying up long term
-        if (allowedUris.indexOf(tab.url) !== -1) {
+        if (allowedSpecificUris.indexOf(tab.url) !== -1) {
             tab.attach({
                 contentScriptFile: data.url'./content.js'),
             });

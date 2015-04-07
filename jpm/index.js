@@ -13,9 +13,10 @@
 var pageMod = require('sdk/page-mod');
 var prefs = require("sdk/preferences/service");
 
-var allowedUris = ['https://respoke.github.io/*', 'https://1660a8b4.ngrok.com/*'];//can only have 1 wildcard
+// allowedUris can only have 1 wildcard, unlike Chrome
+var allowedUris = ['https://respoke.github.io/*', 'https://1660a8b4.ngrok.com/*'];
 var allowedDomains = ['respoke.github.io', '*.ngrok.com'];
-var allowedUris = ['https://1660a8b4.ngrok.com/', 'https://respoke.github.io'];//needs a better way to do this
+var allowedSpecificUris = ['https://1660a8b4.ngrok.com/', 'https://respoke.github.io'];//need a better way to do this
 
 var allowedDomainsPref = 'media.getusermedia.screensharing.allowed_domains';
 var enableScreensharingPref = 'media.getusermedia.screensharing.enabled';
@@ -47,7 +48,7 @@ exports.main = function (options, callbacks) {
     var tabs = require("sdk/tabs");
     for (let tab of tabs) {
          //this needs tidying up long term
-        if (allowedUris.indexOf(tab.url) !== -1) {
+        if (allowedSpecificUris.indexOf(tab.url) !== -1) {
             tab.attach({
                 contentScriptFile: './content.js',
             });

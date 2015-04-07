@@ -1,10 +1,10 @@
 {
-  "title": "My Jetpack Addon",
-  "name": "ff-foo",
+  "title": "respoke-firefox-screen-sharing-extension",
+  "name": "Enable Screen Sharing for Respoke",
   "version": "0.0.1",
-  "description": "",
+  "description": "Basic extension to enable screen-sharing using Respoke in Firefox",
   "main": "index.js",
-  "author": "",
+  "author": "Respoke",
   "engines": {
     "firefox": ">=38.0a1",
     "fennec": ">=38.0a1"
