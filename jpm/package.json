@@ -1,6 +1,6 @@
 {
-  "title": "respoke-firefox-screen-sharing-extension",
-  "name": "Enable Screen Sharing for Respoke",
+  "title": "Respoke Base Screen Sharing Extension",
+  "name": "respoke",
   "version": "0.0.1",
   "description": "Basic extension to enable screen-sharing using Respoke in Firefox",
   "main": "index.js",

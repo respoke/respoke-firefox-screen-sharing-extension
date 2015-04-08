@@ -55,7 +55,7 @@ exports.main = function (options, callbacks) {
          //this needs tidying up long term
         if (allowedSpecificUris.indexOf(tab.url) !== -1) {
             tab.attach({
-                contentScriptFile: data.url'./content.js'),
+                contentScriptFile: data.url('./content.js'),
             });
         }
     }

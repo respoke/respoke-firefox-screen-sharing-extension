@@ -1,6 +1,6 @@
 {
-  "name": "respoke-firefox-screen-sharing-extension",
-  "title": "respoke-firefox-screen-sharing-extension",
+  "name": "broadcastify-respoke",
+  "title": "Respoke Base Screen Sharing Extension",
   "id": "jid1-2AXorRFLaXAwtw",
   "description": "Basic extension to enable screen-sharing using Respoke in Firefox",
   "author": "Respoke",
