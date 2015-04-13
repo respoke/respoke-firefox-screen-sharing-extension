@@ -1,11 +1,11 @@
 {
-  "name": "broadcastify-respoke",
-  "title": "Respoke Base Screen Sharing Extension",
-  "id": "jid1-2AXorRFLaXAwtw",
-  "description": "Basic extension to enable screen-sharing using Respoke in Firefox",
+  "name": "respoke-sample-screen-share-extension-cfx",
+  "title": "Sample Respoke Screen Sharing extension (CFX, aka FF < 38)",
+  "id": "respoke-sample-screen-share-extension-cfx@respoke.io",
+  "description": "Allows screen sharing for *.ngrok.com and respoke.github.io domains",
+  "version": "1.0.0",
   "author": "Respoke",
   "license": "MIT",
-  "version": "0.1",
   "permissions": {
     "private-browsing": true
   }
