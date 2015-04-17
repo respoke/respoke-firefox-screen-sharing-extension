@@ -13,27 +13,31 @@
 var pageMod = require('sdk/page-mod');
 var prefs = require("sdk/preferences/service");
 
-// allowedUris can only have 1 wildcard, unlike Chrome
-var allowedUris = ['https://respoke.github.io/*', 'https://1660a8b4.ngrok.com/*'];
-var allowedDomains = ['respoke.github.io', '*.ngrok.com'];
+var allowedUris = [
+    'https://respoke.github.io/*',
+    '*.ngrok.com'
+];
 
-// used for including the content script into specific loaded tabs after installation
-// this needs improving so we can use regular expressions etc
-var allowedSpecificUris = ['https://1660a8b4.ngrok.com/', 'https://respoke.github.io'];
+var allowedDomains = [
+    'respoke.github.io',
+    '*.ngrok.com'
+];
 
 var allowedDomainsPref = 'media.getusermedia.screensharing.allowed_domains';
 var enableScreensharingPref = 'media.getusermedia.screensharing.enabled';
 
-exports.main = function (options, callbacks) {
+exports.main = function (options) {
 
     if (options.loadReason !== 'startup') {
-        //add the domains!
+        /*
+         * add the values in `allowedDomains` array to the allowed domains preference,
+         * unblocking these domains from obtaining a screen sharing stream with `getUserMedia()`
+         */
         prefs.set(enableScreensharingPref, true);
         var domains = prefs.get(allowedDomainsPref).split(',');
 
         allowedDomains.forEach(function (domain) {
             if (domains.indexOf(domain) === -1) {
-                //add the domain into the allowedDomains
                 domains.push(domain);
             }
         });
@@ -41,37 +45,30 @@ exports.main = function (options, callbacks) {
         prefs.set(allowedDomainsPref, domains.join(','));
     }
 
+    /*
+     * include our content script on any page that matches a value from the `allowedUris` array,
+     * which indicates to respoke that the firefox extension is loaded and available on the page.
+     */
     pageMod.PageMod({
         include: allowedUris,
+        attachTo: ['existing', 'top', 'frame'],
         contentScriptFile: './content.js',
         contentScriptWhen: 'end'
     });
-
-    //load the script into any tabs that are already active
-    var tabs = require("sdk/tabs");
-    for (let tab of tabs) {
-         //this needs tidying up long term
-        if (allowedSpecificUris.indexOf(tab.url) !== -1) {
-            tab.attach({
-                contentScriptFile: './content.js',
-            });
-        }
-    }
-
 };
 
 exports.onUnload = function(reason){
     if (reason !== 'shutdown') {
-
-        //remove the domains we've set
+        /*
+         * remove the values in `allowedDomains` array from the allowed domains preference,
+         * essentially undo'ing the changes our extension made when it was installed.
+         */
         var domains = prefs.get(allowedDomainsPref).split(',');
 
-        //remove the domains in allowedDomains from domains
         domains = domains.filter(function(domain) {
             return allowedDomains.indexOf(domain) === -1;
         });
 
         prefs.set(allowedDomainsPref, domains.join(','));
-
     }
-}
+};
