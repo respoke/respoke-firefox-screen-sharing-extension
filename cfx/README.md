@@ -34,14 +34,10 @@ To get this extension working for you and your domains, you'll need to fork it a
 `./lib/main.js`:
 
 ```js
-var allowedUris = [
-  'https://respoke.github.io/*',
-  '*.ngrok.com'
-];
-
 var allowedDomains = [
-  'respoke.github.io',
-  '*.ngrok.com'
+    '*.ngrok.io',
+    'localhost',
+    'localhost:3000'
 ];
 ```
 
