@@ -36,6 +36,7 @@ To get this extension working for you and your domains, you'll need to fork it a
 ```js
 var allowedDomains = [
     '*.ngrok.io',
+    '*.ngrok.com',
     'localhost',
     'localhost:3000'
 ];

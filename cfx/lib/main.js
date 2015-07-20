@@ -13,10 +13,10 @@
 var pageMod = require('sdk/page-mod');
 var data = require('sdk/self').data;
 var prefs = require('sdk/preferences/service');
-var tabs = require('sdk/tabs');
 
 var allowedDomains = [
     '*.ngrok.io',
+    '*.ngrok.com',
     'localhost',
     'localhost:3000'
 ];
@@ -45,9 +45,6 @@ exports.main = function (options, callbacks) {
         contentScriptFile: './content.js',
         contentScriptWhen: 'end'
     });
-    
-    // use to debug is above code was successful
-    //tabs.open('http://mozilla.org/');
 };
 
 exports.onUnload = function(reason){
