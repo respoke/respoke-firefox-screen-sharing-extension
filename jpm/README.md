@@ -35,17 +35,14 @@ allows you to access your local environment with the https protocol.
 ## Changes required
 
 To get this extension working for you and your domains, you'll need to fork it and change a few variables in
-`./index.js`:
+`./main.js`:
 
 ```js
-var allowedUris = [
-  'https://respoke.github.io/*',
-  '*.ngrok.com'
-];
-
 var allowedDomains = [
-  'respoke.github.io',
-  '*.ngrok.com'
+    '*.ngrok.io',
+    '*.ngrok.com',
+    'localhost',
+    'localhost:3000'
 ];
 ```
 
